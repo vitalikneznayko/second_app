@@ -1,0 +1,19 @@
+.header-text{
+    font-size: 40px;
+}
+.header-container{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+.Searcher input{
+    border-radius: 15px;
+    width: 50%;
+    height: 40px;
+    text-decoration: dotted;
+}
+.Searcher{
+    display: flex;
+    align-items: center;
+    margin-right: 40%;
+}
