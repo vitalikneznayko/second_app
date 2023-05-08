@@ -1,18 +1,14 @@
-.container_info {
+.container-info {
   width: 100%;
   padding-top: 100px;
   display: flex;
   justify-content: center;
 }
-.country_information_box {
+.country-info-box {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: Sans;
-}
-.name_country {
-  font-weight: 500;
 }
 .border {
   display: flex;
@@ -21,7 +17,7 @@ p {
   font-size: 22px;
   font-weight: bolder;
 }
-span {
+.border div {
   padding-left: 15px;
 }
 .flags {
@@ -30,10 +26,19 @@ span {
 .flags img {
   width: 100%;
 }
-.name_country {
-  font-size: 55px;
+.CoatOfArms {
+  display: flex;
+  align-items: center;
 }
-.info_block div {
+.CoatOfArms img {
+  max-width: 105px;
+  max-height: 105px;
+}
+.name-country {
+  font-size: 55px;
+  max-width: 770px;
+}
+.info-block div {
   margin: 0px 0px 40px 0px;
 }
 .info {
@@ -47,15 +52,24 @@ span {
   margin: 10px 40px 0px 0px;
 }
 
-@media (max-width: 1050px) {
-  .country_information_box {
+@media (max-width: 920px) {
+  .country-info-box {
     display: flex;
     flex-direction: column;
   }
-  .flags_block {
+  .flags {
     margin: 0px 0px 0px 0px;
+    color: rgb(0, 136, 255);
   }
+  
   .info {
     flex-direction: column;
+  }
+  .border {
+    flex-direction: column;
+  }
+  .border div {
+    height: 5px;
+    padding-left: 90px;
   }
 }

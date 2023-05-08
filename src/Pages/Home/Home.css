@@ -6,3 +6,8 @@
   margin-top: 79px;
   justify-content: center;
 }
+@media (max-width: 800px) {
+  .pagination-box{
+    justify-content: start;
+  }
+}

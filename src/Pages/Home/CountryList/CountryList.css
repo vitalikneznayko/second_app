@@ -1,5 +1,5 @@
 .country-list{
-    width: 25%;
+    width: 35%;
 }
 
 .country-item{
@@ -11,6 +11,7 @@
     text-align:right;
     justify-content: space-between;
     height: 48px;
+    font-size: 20px;
     cursor: pointer;
     color: rgb(214, 212, 212);
 }
@@ -54,4 +55,19 @@
 .item-right img{
     width: 60px;
     height: 48px;
+}
+@media (max-width: 800px) {
+  .country-item{
+    width: 268px;
+    font-size: 17px;
+  }
+  .country-item:hover{
+     width: 280px;
+}
+  .item-right div{
+    padding-left: 25px;
+  }
+  .Info-Country{
+    display: none;
+  }
 }

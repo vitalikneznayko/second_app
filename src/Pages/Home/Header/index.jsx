@@ -19,7 +19,7 @@ function Header({ allCountry }) {
     setCountrySearch(resultArr);
   };
 
-  const handleSearchButtonClick = () => {
+  const handleSearchButton = () => {
     if (CountrySearch.length > 0) {
       navigate(`/about/${CountrySearch[0].name.common}`);
     }
@@ -40,7 +40,7 @@ function Header({ allCountry }) {
             <option key={item.name.common} value={item.name.common}></option>
           ))}
         </datalist>
-        <button onClick={handleSearchButtonClick}>Search</button>
+        <button onClick={handleSearchButton}>Search</button>
       </div>
     </div>
   );

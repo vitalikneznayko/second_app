@@ -17,3 +17,19 @@
     align-items: center;
     margin-right: 40%;
 }
+
+@media (max-width: 800px) {
+  .pagination-box{
+    justify-content: start;
+  }
+  .Searcher input{
+    padding-left: 25px;
+  }
+  .Searcher{
+    margin-right: 0;
+
+  }
+  .header-text{
+    font-size: 30px;
+  }
+}

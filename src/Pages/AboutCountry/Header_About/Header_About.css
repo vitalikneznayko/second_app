@@ -1,7 +1,16 @@
 .header{
   display: flex;
   justify-content: space-between;
+
 }
 .header Link{
     font-size: 40px;
+}
+.header button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 70px;
+  font-size: 23px;
 }

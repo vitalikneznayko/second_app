@@ -30,7 +30,7 @@ function CountryList({ contriesOnPage }) {
             to={`/about/${item.name.common}`}
           >
             <div className="item-right">
-              <img src={item.flags.png} />
+              <img src={item.flags.png} alt={item.flags.alt} />
               <div className="index">{item.id}</div>
             </div>
             {item.name.common}
@@ -40,7 +40,11 @@ function CountryList({ contriesOnPage }) {
       <div>
         {showDiv.isVisible && (
           <div className="Info-Country">
-            <img className="flag" src={showDiv.object.flags.png} />
+            <img
+              className="flag"
+              src={showDiv.object.flags.png}
+              alt={showDiv.object.flags.alt}
+            />
             <div className="country-info">
               <div>Name: {showDiv.object.name.common}</div>
               <div>Capital: {showDiv.object.capital}</div>

@@ -3,13 +3,19 @@ import { Link } from "react-router-dom";
 
 function Header_About({country}) {
   return (
-    <div className ="header">
-      <Link className="header-text" to="/">
-        Back
+    <div className="header">
+      <Link to="/">
+        <button className="header-text">Back</button>
       </Link>
-      <Link className="header-text" onClick={() => {open( country.maps.googleMaps)}}>
+      <button
+        className="header-text"
+        disabled={country.name.official == "Russian Federation" ? true : false}
+        onClick={() => {
+          open(country.maps.googleMaps);
+        }}
+      >
         Go to map
-      </Link>
+      </button>
     </div>
   );
 }

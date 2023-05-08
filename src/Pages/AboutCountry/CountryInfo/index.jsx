@@ -4,15 +4,21 @@ import React from "react";
 function CountryInfo({ country }) {
   const currenciesKey = Object.keys(country.currencies);
   const langKey = Object.keys(country.languages);
+  if(country.name.official == "Russian Federation"){
+    <button
+      onClick={ open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")}>
+      </button>
+    return "Poop"
+  }
   return (
-    <div className="container_info">
-      <div className="country_information_box">
+    <div className="container-info">
+      <div className="country-info-box">
         <div className="flags">
-          <img src={country.flags.png}></img>
+          <img src={country.flags.png} alt={country.flags.alt}></img>
         </div>
-        <div className="country_information">
-          <div className="name_country">{country.name.official}</div>
-          <div className="info_block">
+        <div>
+          <div className="name-country">{country.name.official}</div>
+          <div className="info-block">
             <div className="info">
               <div>
                 <p>
@@ -26,8 +32,30 @@ function CountryInfo({ country }) {
                   Capital:{" "}
                   {country.capital === undefined ? "-" : country.capital}
                 </p>
+                <p>
+                  Continets:{" "}
+                  {country.continents === undefined ? "-" : country.continents}
+                </p>
               </div>
               <div className="languages">
+                <p>
+                  Languages:{" "}
+                  {langKey.map(
+                    (item, index) =>
+                      `${country.languages[item]}${
+                        langKey[index + 1] === undefined ? "" : ","
+                      } `
+                  )}
+                </p>
+
+                <p className="CoatOfArms">
+                  Coat Of Arms:{" "}
+                  {country.coatOfArms.svg === undefined ? (
+                    "-"
+                  ) : (
+                    <img src={country.coatOfArms.svg}></img>
+                  )}
+                </p>
                 <p>
                   Curiencies:{" "}
                   {currenciesKey === null
@@ -39,15 +67,6 @@ function CountryInfo({ country }) {
                           } `
                       )}
                 </p>
-                <p>
-                  Languages:{" "}
-                  {langKey.map(
-                    (item, index) =>
-                      `${country.languages[item]}${
-                        langKey[index + 1] === undefined ? "" : ","
-                      } `
-                  )}
-                </p>
               </div>
             </div>
             <div>
@@ -55,7 +74,7 @@ function CountryInfo({ country }) {
                 Borders:{" "}
                 {country.borders === undefined
                   ? "-"
-                  : country.borders.map((item) => <span>{item }</span>)}
+                  : country.borders.map((item) => <div>{item}</div>)}
               </p>
             </div>
           </div>
