@@ -1,6 +1,6 @@
 .container-info {
   width: 100%;
-  padding-top: 100px;
+  margin-top: 60px;
   display: flex;
   justify-content: center;
 }
@@ -9,6 +9,9 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border: 1px solid white;
+  border-radius: 12px;
+  background-color: #1f1e1e;
 }
 .border {
   display: flex;
@@ -18,10 +21,10 @@ p {
   font-weight: bolder;
 }
 .border div {
-  padding-left: 15px;
+  padding-left: 10px;
 }
 .flags {
-  margin: 0px 60px 0px 0px;
+  margin: 0px 60px 0px 14px;
 }
 .flags img {
   width: 100%;
@@ -58,8 +61,7 @@ p {
     flex-direction: column;
   }
   .flags {
-    margin: 0px 0px 0px 0px;
-    color: rgb(0, 136, 255);
+    margin: 10px 0px 0px 0px;
   }
   
   .info {
