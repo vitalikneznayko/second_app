@@ -20,9 +20,6 @@ p {
   font-size: 22px;
   font-weight: bolder;
 }
-.border div {
-  padding-left: 10px;
-}
 .flags {
   margin: 0px 60px 0px 14px;
 }
@@ -36,6 +33,7 @@ p {
 .CoatOfArms img {
   max-width: 105px;
   max-height: 105px;
+  margin-left: 15px;
 }
 .name-country {
   font-size: 55px;
@@ -59,19 +57,12 @@ p {
   .country-info-box {
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
   }
   .flags {
     margin: 10px 0px 0px 0px;
   }
-  
   .info {
     flex-direction: column;
-  }
-  .border {
-    flex-direction: column;
-  }
-  .border div {
-    height: 5px;
-    padding-left: 90px;
   }
 }

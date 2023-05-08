@@ -61,8 +61,16 @@
     width: 268px;
     font-size: 17px;
   }
+  .country-item{
+    width: 280%;
+  }
   .country-item:hover{
-     width: 280px;
+     width: 280%;
+}
+.country-list{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1%;
 }
   .item-right div{
     padding-left: 25px;

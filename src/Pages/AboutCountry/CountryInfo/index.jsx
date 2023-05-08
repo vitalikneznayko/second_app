@@ -49,7 +49,7 @@ function CountryInfo({ country }) {
                 </p>
 
                 <p className="CoatOfArms">
-                  Coat Of Arms:{" "}
+                  Coat Of Arms:
                   {country.coatOfArms.svg === undefined ? (
                     "-"
                   ) : (
@@ -74,7 +74,7 @@ function CountryInfo({ country }) {
                 Borders:{" "}
                 {country.borders === undefined
                   ? "-"
-                  : country.borders.map((item) => <div>{item}</div>)}
+                  : country.borders.map((item) =>`${item} `)}
               </p>
             </div>
           </div>
