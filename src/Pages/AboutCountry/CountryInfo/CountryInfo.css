@@ -26,11 +26,11 @@ p {
 .flags img {
   width: 100%;
 }
-.CoatOfArms {
+.coatofarms-box {
   display: flex;
   align-items: center;
 }
-.CoatOfArms img {
+.coatofarms-box img {
   max-width: 105px;
   max-height: 105px;
   margin-left: 15px;

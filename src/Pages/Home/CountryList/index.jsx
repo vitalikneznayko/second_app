@@ -39,7 +39,7 @@ function CountryList({ contriesOnPage }) {
       </div>
       <div>
         {showDiv.isVisible && (
-          <div className="Info-Country">
+          <div className="info-country-box">
             <img
               className="flag"
               src={showDiv.object.flags.png}

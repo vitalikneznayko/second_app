@@ -28,7 +28,7 @@ function Header({ allCountry }) {
   return (
     <div className="header-container">
       <div className="header-text">Country list</div>
-      <div className="Searcher">
+      <div className="searcher">
         <input
           onChange={handleSearchChange}
           placeholder="Search..."

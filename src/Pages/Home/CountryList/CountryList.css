@@ -40,7 +40,7 @@
     height: 40%;
     margin-bottom: 10px;
 }
-.Info-Country{
+.info-country-box{
     width: 300px;
     padding-left: 80%;
     padding-top: 20px;
@@ -75,7 +75,7 @@
   .item-right div{
     padding-left: 25px;
   }
-  .Info-Country{
+  .info-country-box{
     display: none;
   }
 }
