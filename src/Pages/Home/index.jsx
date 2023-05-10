@@ -71,7 +71,7 @@ function Home() {
         ></StyledPagination>
       </div>
     </>
-  );
+);
 }
 
 export default Home;

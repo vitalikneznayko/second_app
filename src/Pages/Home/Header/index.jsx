@@ -13,7 +13,7 @@ function Header({ allCountry }) {
     }
 
     const resultArr = allCountry.filter((item) =>
-      item.name.common.toLowerCase().includes(e.target.value.toLowerCase())
+      item.name.common.toLowerCase().startsWith(e.target.value.toLowerCase())
     );
 
     setCountrySearch(resultArr);
