@@ -1,81 +1,81 @@
-.country-list{
-    width: 35%;
+.country-list {
+  width: 35%;
 }
 
-.country-item{
-    margin-top: 3px;
-    border: 1px solid white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align:right;
-    justify-content: space-between;
-    height: 48px;
-    font-size: 20px;
-    cursor: pointer;
-    color: rgb(214, 212, 212);
+.country-item {
+  margin-top: 3px;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: right;
+  justify-content: space-between;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  color: rgb(214, 212, 212);
 }
-.country-item:hover{
-    color: rgb(214, 212, 212);
-    background-color: rgba(0, 102, 255, 0.403);
-    width: 105%;
+.country-item:hover {
+  color: rgb(214, 212, 212);
+  background-color: rgba(0, 102, 255, 0.403);
+  width: 105%;
 }
-.item-right{
-    display: flex;
-    align-items: center;
+.item-right {
+  display: flex;
+  align-items: center;
 }
-.main-page{
-    display: flex;
+.main-page {
+  display: flex;
 }
-.country-info div{
-    width: 300px;
-    text-align: center;
-    border:1px solid white;
-    font-size: 20px;
-    margin-top: 1px;
+.country-info div {
+  width: 300px;
+  text-align: center;
+  border: 1px solid white;
+  font-size: 20px;
+  margin-top: 1px;
 }
 
-.flag{
-    width: 98%;
-    height: 40%;
-    margin-bottom: 10px;
+.flag {
+  width: 98%;
+  height: 40%;
+  margin-bottom: 10px;
 }
-.info-country-box{
-    width: 300px;
-    padding-left: 80%;
-    padding-top: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+.info-country-box {
+  width: 300px;
+  padding-left: 80%;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
-.item-right div{
-    padding-left: 65px;
+.item-right div {
+  padding-left: 65px;
 }
-.item-right img{
-    width: 60px;
-    height: 48px;
+.item-right img {
+  width: 60px;
+  height: 48px;
 }
 @media (max-width: 800px) {
-  .country-item{
+  .country-item {
     width: 268px;
     font-size: 17px;
   }
-  .country-item{
+  .country-item {
     width: 280%;
   }
-  .country-item:hover{
-     width: 280%;
-}
-.country-list{
+  .country-item:hover {
+    width: 280%;
+  }
+  .country-list {
     display: flex;
     flex-direction: column;
     margin-left: 1%;
-}
-  .item-right div{
+  }
+  .item-right div {
     padding-left: 25px;
   }
-  .info-country-box{
+  .info-country-box {
     display: none;
   }
 }
