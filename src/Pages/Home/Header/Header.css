@@ -1,6 +1,6 @@
 .header-text {
   width: 40%;
-  font-size: 40px;
+  font-size: 35px;
 }
 .header-container {
   display: flex;
@@ -10,7 +10,7 @@
 .searcher input {
   border-radius: 15px;
   width: 30%;
-  height: 40px;
+  height: 35px;
   text-decoration: dotted;
   font-size: 15px;
 }

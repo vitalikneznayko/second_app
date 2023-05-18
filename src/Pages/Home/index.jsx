@@ -33,14 +33,29 @@ function Home() {
   const allPage =
     sortedCountry.length === 0
       ? allCountry.length / countItems
-      : Math.round(sortedCountry.length / countItems);
+      : Math.ceil(sortedCountry.length / countItems);
   const lastCountryIndex = currentPage * countItems;
   const firstCountryIndex = lastCountryIndex - countItems;
   const currentCountry = (
     sortedCountry.length === 0 ? allCountry : sortedCountry
   ).slice(firstCountryIndex, lastCountryIndex);
   const [flagSortAB, setFlagSortAB] = useState(false);
-  const [searchQuery, setSearchQuery] = useState([]);
+  const [flagSortId, setFlagSortId] = useState(false);
+  const [chekContinent, setChekContinent] = useState(true);
+  const [chekRegion, setChekRegion] = useState(true);
+  const [currentContinent, setCurrentContinent] = useState(null);
+  const [currentRegion, setCurrentRegion] = useState(null);
+  const [activeRegion, setActiveRegion] = useState(null);
+
+  const regions = allCountry.reduce((acc, country) => {
+    const { continents, subregion } = country;
+    if (acc[continents]) {
+      acc[continents].add(subregion);
+    } else {
+      acc[continents] = new Set([subregion]);
+    }
+    return acc;
+  }, {});
 
   const nextListPage = (e, p) => {
     sessionStorage.setItem("pageNum", p);
@@ -48,35 +63,50 @@ function Home() {
   };
 
   const filterById = () => {
-    setFlagSortAB(!flagSortAB);
-    if (flagSortAB) {
-      sortedById = allCountry.sort((a, b) => b.id - a.id);
+    setFlagSortId(!flagSortId);
+    let sortedById;
+    if (!flagSortId) {
+      sortedById = (sortedCountry.length === 0 ? allCountry : sortedCountry)
+        .slice()
+        .sort((a, b) => b.id - a.id);
       setSortedCountry(sortedById);
-    } else sortedById = allCountry.sort((a, b) => a.id - b.id);
+    } else
+      sortedById = (sortedCountry.length === 0 ? allCountry : sortedCountry)
+        .slice()
+        .sort((a, b) => a.id - b.id);
     setSortedCountry(sortedById);
   };
   const filterAlphabetically = () => {
     setFlagSortAB(!flagSortAB);
+    let sortedAlphabetically;
     if (flagSortAB) {
-      sortedAlphabetically = allCountry.sort(function (a, b) {
-        if (a.name.common < b.name.common) {
-          return 1;
-        }
-        if (a.name.common > b.name.common) {
-          return -1;
-        }
-        return 0;
-      });
+      sortedAlphabetically = (
+        sortedCountry.length === 0 ? allCountry : sortedCountry
+      )
+        .slice()
+        .sort(function (a, b) {
+          if (a.name.common < b.name.common) {
+            return 1;
+          }
+          if (a.name.common > b.name.common) {
+            return -1;
+          }
+          return 0;
+        });
     } else {
-      sortedAlphabetically = allCountry.sort(function (a, b) {
-        if (a.name.common < b.name.common) {
-          return -1;
-        }
-        if (a.name.common > b.name.common) {
-          return 1;
-        }
-        return 0;
-      });
+      sortedAlphabetically = (
+        sortedCountry.length === 0 ? allCountry : sortedCountry
+      )
+        .slice()
+        .sort(function (a, b) {
+          if (a.name.common < b.name.common) {
+            return -1;
+          }
+          if (a.name.common > b.name.common) {
+            return 1;
+          }
+          return 0;
+        });
     }
     setSortedCountry(sortedAlphabetically);
   };
@@ -95,41 +125,110 @@ function Home() {
     },
     []
   );
-  const handleSearch = () => {
-    const filteredByRegion = allCountry.filter((country) =>
-      country.region.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setSortedCountry(filteredByRegion);
+  const SortByContinent = (item) => {
+      setCurrentContinent(item);
+      chekContinent == true;
+      const tmp = allCountry.filter(
+        (obj) => String(obj.continents) === String(item)
+      );
+      setSortedCountry(tmp);
+      setCurrentPage(1);
   };
-
+  const ResetAll = () => {
+    setChekContinent(true);
+    setChekRegion(true);
+    setCurrentContinent(null);
+    setCurrentRegion(null);
+    setActiveRegion(null);
+    setFlagSortAB(null);
+    setFlagSortId(null);
+    allCountry.sort((a, b) => {
+      if (a.id < b.id) {
+        return -1;
+      }
+      if (a.id > b.id) {
+        return 1;
+      }
+      return 0;
+    });
+    setSortedCountry(allCountry);
+  };
+  const SortByRegion = (item) => {
+    if (currentRegion != item) {
+      setCurrentRegion(item);
+      setActiveRegion(item);
+      chekRegion == true;
+      const tmp = allCountry.filter(
+        (obj) =>
+          String(obj.continents) === String(currentContinent) &&
+          String(obj.subregion) === String(item)
+      );
+      setSortedCountry(tmp);
+      setCurrentPage(1);
+    }
+    if (currentRegion == item) {
+      const tmp = allCountry.filter(
+        (obj) => String(obj.continents) === String(currentContinent)
+      );
+      setCurrentRegion(null);
+      setActiveRegion(null);
+      setChekRegion(!chekRegion);
+      setSortedCountry(tmp);
+    }
+  };
   if (allCountry.length === 0) return <div>Loading...</div>;
   return (
     <>
-      <Header allCountry={sortedCountry} />
+      <Header allCountry={allCountry} />
       <CountryList contriesOnPage={currentCountry} />
-      <button variant="contained" onClick={() => filterById()}>
-        Filter id
-      </button>
-      <button variant="contained" onClick={() => filterAlphabetically()}>
-        Filter A-UA
-      </button>
-      <input
-        type="text"
-        placeholder="Search by region"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-      <div className="pagination-box">
-        <StyledPagination
-          count={allPage}
-          page={currentPage}
-          variant="outlined"
-          shape="rounded"
-          size="large"
-          onChange={nextListPage}
-          siblingCount={2}
-        ></StyledPagination>
+      <div className="bottom-block">
+        <div>
+          <button variant="contained" onClick={() => filterById()}>
+            Filter id
+          </button>
+          <button variant="contained" onClick={() => filterAlphabetically()}>
+            Filter A-UA
+          </button>
+          <button variant="contained" onClick={() => ResetAll()}>
+            Reset
+          </button>
+          <div className="continents">
+            {Object.keys(regions).map((item) => (
+              <button onClick={() => SortByContinent(item)}>{item}</button>
+            ))}
+          </div>
+        </div>
+        <div className="pagination-box">
+          {currentContinent && (
+          <div className="sortPanel">
+            {Array.from(regions[currentContinent]).map((subregion) => {
+              if (currentContinent != "Antarctica") {
+                return (
+                  <button
+                    onClick={() => SortByRegion(subregion)}
+                    className={`defButton buttonRegion ${
+                      activeRegion === subregion ? "activeBut" : ""
+                    }`}
+                    key={subregion}
+                  >
+                    {subregion}
+                  </button>
+                );
+              }
+              return null;
+            })}
+          </div>
+          )}
+          <StyledPagination
+            count={allPage}
+            page={currentPage}
+            variant="outlined"
+            shape="rounded"
+            size="large"
+            onChange={nextListPage}
+            siblingCount={2}
+          ></StyledPagination>
+        </div>
       </div>
     </>
   );

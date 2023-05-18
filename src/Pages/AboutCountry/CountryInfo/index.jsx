@@ -30,7 +30,7 @@ function CountryInfo({ country }) {
                 </p>
                 <p>
                   Capital:{" "}
-                  {country.capital === null ? "-" : country.capital}
+                  {country.capital === undefined ? "-" : country.capital}
                 </p>
                 <p>
                   Continets:{" "}
