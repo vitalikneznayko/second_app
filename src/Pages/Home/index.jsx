@@ -127,6 +127,7 @@ function Home() {
   );
   const SortByContinent = (item) => {
       setCurrentContinent(item);
+      setCurrentRegion(null);
       chekContinent == true;
       const tmp = allCountry.filter(
         (obj) => String(obj.continents) === String(item)
@@ -200,7 +201,7 @@ function Home() {
         </div>
         <div className="pagination-box">
           {currentContinent && (
-          <div className="sortPanel">
+          <div>
             {Array.from(regions[currentContinent]).map((subregion) => {
               if (currentContinent != "Antarctica") {
                 return (

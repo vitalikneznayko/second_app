@@ -1,8 +1,5 @@
 .pagination-box {
   width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -28,6 +25,5 @@
 .bottom-block {
   display: flex;
   flex-direction: row;
-  min-height:100%;
   justify-content: space-between;
 }
