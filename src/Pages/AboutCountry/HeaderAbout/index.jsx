@@ -1,7 +1,8 @@
-import "./Header_About.css";
+import "./HeaderAbout.css";
 import { Link } from "react-router-dom";
 
-function Header_About({country}) {
+
+function HeaderAbout({country}) {
   return (
     <div className="header">
       <Link to="/">
@@ -20,4 +21,4 @@ function Header_About({country}) {
   );
 }
 
-export default Header_About;
+export default HeaderAbout;

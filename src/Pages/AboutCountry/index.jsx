@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Header from "./Header_About";
 import axios from "axios";
 import { useParams } from "react-router";
 import CountryInfo from "./CountryInfo";
+import HeaderAbout from "./HeaderAbout";
 
 function AboutCountry() {
   const { countryInfo } = useParams();
@@ -24,7 +24,7 @@ function AboutCountry() {
   if (!country) {return <div>Loading...</div>;}
   return (
     <>
-      <Header country={country} />
+      <HeaderAbout country={country} />
       <CountryInfo country={country} />
     </>
   );

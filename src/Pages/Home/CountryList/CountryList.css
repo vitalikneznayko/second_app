@@ -50,6 +50,7 @@
   padding-left: 65px;
 }
 .item-right img {
+  z-index: 1;
   width: 60px;
   height: 48px;
 }
@@ -59,10 +60,10 @@
     font-size: 17px;
   }
   .country-item {
-    width: 280%;
+    width: 100%;
   }
   .country-item:hover {
-    width: 280%;
+    width: 100%;
   }
   .country-list {
     display: flex;
