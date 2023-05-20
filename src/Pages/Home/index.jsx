@@ -43,17 +43,19 @@ function Home() {
   const [flagSortId, setFlagSortId] = useState(false);
   const [currentContinent, setCurrentContinent] = useState(null);
   const [currentRegion, setCurrentRegion] = useState(null);
-
-  const regions = allCountry.reduce((acc, country) => {
-    const { continents, subregion } = country;
-    if (acc[continents]) {
-      acc[continents].add(subregion);
-    } else {
-      acc[continents] = new Set([subregion]);
-    }
-    return acc;
-  }, {});
-
+  const [regions, setRegion] = useState([]);
+  useEffect(() => {
+    const tmp = allCountry.reduce((acc, country) => {
+      const { continents, subregion } = country;
+      if (acc[continents]) {
+        acc[continents].add(subregion);
+      } else {
+        acc[continents] = new Set([subregion]);
+      }
+      return acc;
+    }, {});
+    setRegion(tmp);
+  }, [allCountry]);
   const nextListPage = (e, p) => {
     sessionStorage.setItem("pageNum", p);
     setCurrentPage(p);

@@ -25,7 +25,7 @@ function CountryInfo({ country }) {
         <Box sx={{ borderBottom: 1, borderColor: "white", color: "white" }}>
           <TabList
             onChange={handleChange}
-            textColor="white"
+            textColor="inherit"
             indicatorColor="gray"
           >
             <Tab label="Main Info" value="1" />
