@@ -1,29 +1,39 @@
 .pagination-box {
   width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 20px;
-  margin-right: 270px;
   justify-content: center;
 }
-.pagination-box button{
-  margin-right: 5px;
-  margin-bottom: 5px;
+.filter button{
+  margin-bottom: 1px;
+  margin-left: 0.5px;
 }
-@media (max-width: 800px) {
-  .pagination-box {
-    justify-content: start;
-  }
+.continents {
+  display: flex;
+  flex-direction: column;
 }
-
-.continents button {
-  margin-top: 5px;
-  margin-left: 5px;
+.center-info {
+  display: flex;
+  justify-content: space-between;
 }
-.bottom-block {
+.subreg {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.subreg button{
+  margin-top: 5px;
+  margin-left: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 70px;
+}
+.container-filter {
+  display: flex;
+  flex-direction: column;
+  width: 285px;
 }

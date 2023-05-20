@@ -41,11 +41,8 @@ function Home() {
   ).slice(firstCountryIndex, lastCountryIndex);
   const [flagSortAB, setFlagSortAB] = useState(false);
   const [flagSortId, setFlagSortId] = useState(false);
-  const [chekContinent, setChekContinent] = useState(true);
-  const [chekRegion, setChekRegion] = useState(true);
   const [currentContinent, setCurrentContinent] = useState(null);
   const [currentRegion, setCurrentRegion] = useState(null);
-  const [activeRegion, setActiveRegion] = useState(null);
 
   const regions = allCountry.reduce((acc, country) => {
     const { continents, subregion } = country;
@@ -66,14 +63,14 @@ function Home() {
     setFlagSortId(!flagSortId);
     let sortedById;
     if (!flagSortId) {
-      sortedById = (sortedCountry.length === 0 ? allCountry : sortedCountry)
-        .slice()
-        .sort((a, b) => b.id - a.id);
+      sortedById = (
+        sortedCountry.length === 0 ? allCountry : sortedCountry
+      ).sort((a, b) => b.id - a.id);
       setSortedCountry(sortedById);
     } else
-      sortedById = (sortedCountry.length === 0 ? allCountry : sortedCountry)
-        .slice()
-        .sort((a, b) => a.id - b.id);
+      sortedById = (
+        sortedCountry.length === 0 ? allCountry : sortedCountry
+      ).sort((a, b) => a.id - b.id);
     setSortedCountry(sortedById);
   };
   const filterAlphabetically = () => {
@@ -82,31 +79,27 @@ function Home() {
     if (flagSortAB) {
       sortedAlphabetically = (
         sortedCountry.length === 0 ? allCountry : sortedCountry
-      )
-        .slice()
-        .sort(function (a, b) {
-          if (a.name.common < b.name.common) {
-            return 1;
-          }
-          if (a.name.common > b.name.common) {
-            return -1;
-          }
-          return 0;
-        });
+      ).sort(function (a, b) {
+        if (a.name.common < b.name.common) {
+          return -1;
+        }
+        if (a.name.common > b.name.common) {
+          return 1;
+        }
+        return 0;
+      });
     } else {
       sortedAlphabetically = (
         sortedCountry.length === 0 ? allCountry : sortedCountry
-      )
-        .slice()
-        .sort(function (a, b) {
-          if (a.name.common < b.name.common) {
-            return -1;
-          }
-          if (a.name.common > b.name.common) {
-            return 1;
-          }
-          return 0;
-        });
+      ).sort(function (a, b) {
+        if (a.name.common < b.name.common) {
+          return 1;
+        }
+        if (a.name.common > b.name.common) {
+          return -1;
+        }
+        return 0;
+      });
     }
     setSortedCountry(sortedAlphabetically);
   };
@@ -126,21 +119,17 @@ function Home() {
     []
   );
   const SortByContinent = (item) => {
-      setCurrentContinent(item);
-      setCurrentRegion(null);
-      chekContinent == true;
-      const tmp = allCountry.filter(
-        (obj) => String(obj.continents) === String(item)
-      );
-      setSortedCountry(tmp);
-      setCurrentPage(1);
+    setCurrentContinent(item);
+    setCurrentRegion(null);
+    const tmp = allCountry.filter(
+      (obj) => String(obj.continents) === String(item)
+    );
+    setSortedCountry(tmp);
+    setCurrentPage(1);
   };
   const ResetAll = () => {
-    setChekContinent(true);
-    setChekRegion(true);
     setCurrentContinent(null);
     setCurrentRegion(null);
-    setActiveRegion(null);
     setFlagSortAB(null);
     setFlagSortId(null);
     allCountry.sort((a, b) => {
@@ -155,81 +144,71 @@ function Home() {
     setSortedCountry(allCountry);
   };
   const SortByRegion = (item) => {
-    if (currentRegion != item) {
-      setCurrentRegion(item);
-      setActiveRegion(item);
-      chekRegion == true;
-      const tmp = allCountry.filter(
-        (obj) =>
-          String(obj.continents) === String(currentContinent) &&
-          String(obj.subregion) === String(item)
-      );
-      setSortedCountry(tmp);
-      setCurrentPage(1);
-    }
-    if (currentRegion == item) {
-      const tmp = allCountry.filter(
-        (obj) => String(obj.continents) === String(currentContinent)
-      );
-      setCurrentRegion(null);
-      setActiveRegion(null);
-      setChekRegion(!chekRegion);
-      setSortedCountry(tmp);
-    }
+    setCurrentRegion(item);
+    const tmp = allCountry.filter(
+      (obj) =>
+        String(obj.continents) === String(currentContinent) &&
+        String(obj.subregion) === String(item)
+    );
+    setSortedCountry(tmp);
+    setCurrentPage(1);
   };
   if (allCountry.length === 0) return <div>Loading...</div>;
   return (
     <>
       <Header allCountry={allCountry} />
-      <CountryList contriesOnPage={currentCountry} />
-      <div className="bottom-block">
-        <div>
-          <button variant="contained" onClick={() => filterById()}>
-            Filter id
-          </button>
-          <button variant="contained" onClick={() => filterAlphabetically()}>
-            Filter A-UA
-          </button>
-          <button variant="contained" onClick={() => ResetAll()}>
-            Reset
-          </button>
+      <div className="center-info">
+        <CountryList contriesOnPage={currentCountry} />
+        <div className="container-filter">
+          <div className="filter">
+            <button variant="contained" onClick={() => filterById()}>
+              Filter id{flagSortId ? "↓" : "↑"}
+            </button>
+            <button variant="contained" onClick={() => filterAlphabetically()}>
+              Filter {!flagSortAB ? "A-Y" : "Y-A"}
+            </button>
+            <button variant="contained" onClick={() => ResetAll()}>
+              Reset
+            </button>
+          </div>
           <div className="continents">
             {Object.keys(regions).map((item) => (
-              <button onClick={() => SortByContinent(item)}>{item}</button>
+              <button key={item} onClick={() => SortByContinent(item)}>
+                {item}
+              </button>
             ))}
           </div>
-        </div>
-        <div className="pagination-box">
-          {currentContinent && (
-          <div>
-            {Array.from(regions[currentContinent]).map((subregion) => {
-              if (currentContinent != "Antarctica") {
-                return (
-                  <button
-                    onClick={() => SortByRegion(subregion)}
-                    className={`defButton buttonRegion ${
-                      activeRegion === subregion ? "activeBut" : ""
-                    }`}
-                    key={subregion}
-                  >
-                    {subregion}
-                  </button>
-                );
-              }
-              return null;
-            })}
+          <div className="container-subreg">
+            {currentContinent && (
+              <div className="subreg">
+                {Array.from(regions[currentContinent]).map((subregion) => {
+                  if (currentContinent != "Antarctica") {
+                    return (
+                      <button
+                        onClick={() => SortByRegion(subregion)}
+                        key={subregion}
+                      >
+                        {subregion}
+                      </button>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+            )}
           </div>
-          )}
-          <StyledPagination
-            count={allPage}
-            page={currentPage}
-            variant="outlined"
-            shape="rounded"
-            size="large"
-            onChange={nextListPage}
-            siblingCount={2}
-          ></StyledPagination>
         </div>
+      </div>
+      <div className="pagination-box">
+        <StyledPagination
+          count={allPage}
+          page={currentPage}
+          variant="outlined"
+          shape="rounded"
+          size="large"
+          onChange={nextListPage}
+          siblingCount={2}
+        ></StyledPagination>
       </div>
     </>
   );
