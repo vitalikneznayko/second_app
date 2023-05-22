@@ -5,13 +5,13 @@ import CountryInfo from "./CountryInfo";
 import HeaderAbout from "./HeaderAbout";
 
 function AboutCountry() {
-  const { countryInfo } = useParams();
+  const { cca3 } = useParams();
   const [country, setCountry] = useState(null);
   useEffect(() => {
     async function fetchCountry() {
       try {
         const response = await axios(
-          `https://restcountries.com/v3.1/name/${countryInfo}`
+          `https://restcountries.com/v3.1/alpha/${cca3}`
         );
         setCountry(response.data[0]);
       } catch {
@@ -19,7 +19,7 @@ function AboutCountry() {
       }
     }
     fetchCountry();
-  }, [countryInfo]);
+  }, [cca3]);
 
   if (!country) {return <div>Loading...</div>;}
   return (

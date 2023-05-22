@@ -1,0 +1,10 @@
+.map {
+  width: 700px;
+  height: 450px;
+}
+.map_container {
+  display: flex;
+  justify-content: center;
+  border: 1px solid white;
+  padding: 20px;
+}

@@ -21,7 +21,7 @@ function Header({ allCountry }) {
 
   const handleSearchButton = () => {
     if (CountrySearch.length > 0) {
-      navigate(`/about/${CountrySearch[0].name.common}`);
+      navigate(`/about/${CountrySearch[0].cca3}`);
     }
   };
 

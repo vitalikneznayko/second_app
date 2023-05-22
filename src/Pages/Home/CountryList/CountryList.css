@@ -15,6 +15,10 @@
   cursor: pointer;
   color: rgb(214, 212, 212);
 }
+.item-name-common{
+  margin-right: 5px;
+}
+
 .country-item:hover {
   color: rgb(214, 212, 212);
   background-color: rgba(0, 102, 255, 0.403);

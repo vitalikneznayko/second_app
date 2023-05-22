@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
 import CountryList from "./CountryList";
 import Header from "./Header";
 import Pagination from "@mui/material/Pagination";
@@ -159,35 +159,32 @@ function Home() {
   return (
     <>
       <Header allCountry={allCountry} />
-        <div className="navbar">
-          <div className="container nav-container">
-            <input className="checkbox" type="checkbox" name="" id="" />
-            <div className="hamburger-lines">
-              <span className="line line1"></span>
-              <span className="line line2"></span>
-              <span className="line line3"></span>
-            </div>
-            <div className="menu-items">
-              <button variant="contained" onClick={() => filterById()}>
-                Filter id{flagSortId ? "↓" : "↑"}
+      <div className="navbar">
+        <div className="container nav-container">
+          <input className="checkbox" type="checkbox" name="" id="" />
+          <div className="hamburger-lines">
+            <span className="line line1"></span>
+            <span className="line line2"></span>
+            <span className="line line3"></span>
+          </div>
+          <div className="menu-items">
+            <button variant="contained" onClick={() => filterById()}>
+              Filter id{flagSortId ? "↓" : "↑"}
+            </button>
+            <button variant="contained" onClick={() => filterAlphabetically()}>
+              Filter {!flagSortAB ? "A-Y" : "Y-A"}
+            </button>
+            <button variant="contained" onClick={() => ResetAll()}>
+              Reset
+            </button>
+            {Object.keys(regions).map((item) => (
+              <button key={item} onClick={() => SortByContinent(item)}>
+                {item}
               </button>
-              <button
-                variant="contained"
-                onClick={() => filterAlphabetically()}
-              >
-                Filter {!flagSortAB ? "A-Y" : "Y-A"}
-              </button>
-              <button variant="contained" onClick={() => ResetAll()}>
-                Reset
-              </button>
-              {Object.keys(regions).map((item) => (
-                <button key={item} onClick={() => SortByContinent(item)}>
-                  {item}
-                </button>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
+      </div>
       <div className="center-info">
         <CountryList contriesOnPage={currentCountry} />
         <div className="container-filter">

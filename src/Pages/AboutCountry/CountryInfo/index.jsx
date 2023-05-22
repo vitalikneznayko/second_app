@@ -1,15 +1,20 @@
 import "./CountryInfo.css";
 import * as React from "react";
+import { useEffect, useState } from "react";
+
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
+import Maps from "../../../componets/Maps";
+import { Link } from "react-router-dom";
 
 function CountryInfo({ country }) {
   const currenciesKey = Object.keys(country.currencies);
   const langKey = Object.keys(country.languages);
   const [value, setValue] = React.useState("1");
+
   if (country.name.official == "Russian Federation") {
     <button
       onClick={open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")}
@@ -30,6 +35,7 @@ function CountryInfo({ country }) {
           >
             <Tab label="Main Info" value="1" />
             <Tab label="More Info" value="2" />
+            <Tab label="Maps" value="3" />
           </TabList>
         </Box>
         <TabPanel value="1">
@@ -94,7 +100,11 @@ function CountryInfo({ country }) {
                       Borders:{" "}
                       {country.borders === undefined
                         ? "-"
-                        : country.borders.map((item) => `${item} `)}
+                        : country.borders.map((item) => (
+                            <Link to={`/about/${item}`}>
+                              <button>{item}</button>
+                            </Link>
+                          ))}
                     </p>
                   </div>
                 </div>
@@ -176,6 +186,9 @@ function CountryInfo({ country }) {
               </div>
             </div>
           </div>
+        </TabPanel>
+        <TabPanel value="3">
+          <Maps />
         </TabPanel>
       </TabContext>
     </div>

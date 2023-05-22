@@ -27,13 +27,13 @@ function CountryList({ contriesOnPage }) {
             onMouseEnter={() => onMouseEnter(item.id)}
             onMouseLeave={() => onMouseLeave()}
             key={item.name.common}
-            to={`/about/${item.name.common}`}
+            to={`/about/${item.cca3}`}
           >
             <div className="item-right">
               <img src={item.flags.png} alt={item.flags.alt} />
               <div className="index">{item.id}</div>
             </div>
-            {item.name.common}
+            <span className="item-name-common">{item.name.common}</span>
           </Link>
         ))}
       </div>

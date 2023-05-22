@@ -8,15 +8,6 @@ function HeaderAbout({country}) {
       <Link to="/">
         <button className="header-text">Back</button>
       </Link>
-      <button
-        className="header-text"
-        disabled={country.name.official == "Russian Federation" ? true : false}
-        onClick={() => {
-          open(country.maps.googleMaps);
-        }}
-      >
-        Go to map
-      </button>
     </div>
   );
 }
