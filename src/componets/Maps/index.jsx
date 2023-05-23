@@ -14,14 +14,13 @@ const Maps = () => {
 
   useEffect(() => {
     async function fetchCountry() {
-      try {
-        const response = await axios(
-          `https://restcountries.com/v3.1/alpha/${cca3}`
-        );
-        setCountry(response.data[0]);
-      } catch (error) {
-        setCountry("Error");
-      }
+          try {
+            const result = await axios("http://46.101.96.179/all");
+            const tmp = result.data.find((item) => item.cca3 === cca3);
+            setCountry(tmp);
+          } catch {
+            setCountry("Error");
+          }
     }
     fetchCountry();
   }, [cca3]);

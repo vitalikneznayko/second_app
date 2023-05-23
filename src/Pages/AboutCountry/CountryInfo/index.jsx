@@ -1,7 +1,6 @@
 import "./CountryInfo.css";
 import * as React from "react";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabList from "@mui/lab/TabList";
@@ -15,7 +14,7 @@ function CountryInfo({ country }) {
     country.currencies != null ? Object.keys(country.currencies) : null;
   const langKey =
     country.languages != null ? Object.keys(country.languages) : null;
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = useState("1");
 
   if (country.name.official == "Russian Federation") {
     <button
@@ -75,14 +74,15 @@ function CountryInfo({ country }) {
                       </p>
                       <p>
                         Languages:{" "}
-                        {langKey === null
-                          ? "-"
-                          : langKey.map(
-                              (item, index) =>
-                                `${country.languages[item]}${
-                                  langKey[index + 1] === undefined ? "" : ","
-                                } `
-                            )}
+                        {langKey.map((item, index) => (
+                          <Link
+                            key={item}
+                            to={`/home/language/${item}`}
+                          >
+                            {country.languages[item]}
+                            {langKey[index + 1] === undefined ? " " : ", "}
+                          </Link>
+                        ))}
                       </p>
                       <p>
                         Curiencies:{" "}
@@ -102,15 +102,15 @@ function CountryInfo({ country }) {
                   <div>
                     <p className="container-border">
                       <span className="text-border">Borders:</span>
-                      <div className="border">
+                      <span className="border">
                         {country.borders === undefined
                           ? "-"
                           : country.borders.map((item) => (
                               <Link to={`/about/${item}`}>
-                                <button>{item}</button>
+                                <button key={item}>{item}</button>
                               </Link>
                             ))}
-                      </div>
+                      </span>
                     </p>
                   </div>
                 </div>

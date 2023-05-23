@@ -15,22 +15,16 @@
 .border {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  max-width: 650px;
+  max-width: 600px;
   flex-wrap: wrap;
-}
-.text-border{
-  padding-top: 10px;
 }
 .container-border{
   display: flex;
-  height: 90px;
 }
 .border button {
   margin-left: 10px;
-  margin-bottom: 5px;
-  height: 100%;
-  font-size: 18px;
+  font-size: 17px;
+  margin-bottom: 2px;
 }
 p {
   font-size: 22px;

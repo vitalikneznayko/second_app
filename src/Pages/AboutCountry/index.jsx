@@ -7,24 +7,29 @@ import HeaderAbout from "./HeaderAbout";
 function AboutCountry() {
   const { cca3 } = useParams();
   const [country, setCountry] = useState(null);
+
   useEffect(() => {
-    async function fetchCountry() {
+    const fetchData = async () => {
       try {
-        const response = await axios(
-          `https://restcountries.com/v3.1/alpha/${cca3}`
-        );
-        setCountry(response.data[0]);
-      } catch {
+        const result = await axios.get("http://46.101.96.179/all");
+        const tmp = result.data.find((item) => item.cca3 === cca3);
+        setCountry(tmp);
+      } catch (error) {
+        console.error(error);
         setCountry("Error");
       }
-    }
-    fetchCountry();
+    };
+
+    fetchData();
   }, [cca3]);
 
-  if (!country) {return <div>Loading...</div>;}
+  if (!country) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <HeaderAbout country={country} />
+      <HeaderAbout />
       <CountryInfo country={country} />
     </>
   );

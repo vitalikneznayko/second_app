@@ -1,12 +1,13 @@
 import "./HeaderAbout.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-
-function HeaderAbout({country}) {
+function HeaderAbout() {
+  const navigate = useNavigate();
   return (
     <div className="header">
+      <button onClick = {() => navigate(-1)}className="header-text">Back</button>
       <Link to="/">
-        <button className="header-text">Back</button>
+        <button className="header-text">Back to list</button>
       </Link>
     </div>
   );
