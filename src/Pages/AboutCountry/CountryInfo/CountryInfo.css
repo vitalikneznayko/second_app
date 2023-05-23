@@ -3,14 +3,7 @@
   display: flex;
   justify-content: center;
 }
-.tfds{
-  max-width: 100%;
-  max-height: 100%;
-}
-.container_CountryInfo{
-  max-width: 100%;
-  max-height: 100%;
-}
+
 .country-info-box {
   display: flex;
   flex-direction: row;
@@ -26,7 +19,7 @@
   max-width: 600px;
   flex-wrap: wrap;
 }
-.container-border{
+.container-border {
   display: flex;
 }
 .border button {
@@ -38,10 +31,10 @@ p {
   font-size: 22px;
   font-weight: bolder;
 }
-.language{
+.language {
   color: rgb(211, 211, 211);
 }
-.language:hover{
+.language:hover {
   color: rgb(255, 255, 255);
   text-decoration: inherit;
 }
@@ -88,12 +81,20 @@ p {
   .country-info-box {
     display: flex;
     flex-direction: column;
-    text-align: center;
   }
+  
   .flags {
-    margin: 10px 0px 0px 0px;
+    margin: 10px 10px 0px 10px;
   }
   .info {
     flex-direction: column;
+  }
+  .info div {
+    padding-left: 10px;
+    margin: 10px 0px 0px 0px;
+  }
+  .coatofarms-box img {
+    margin-top: 5px;
+    margin-left: 15px;
   }
 }

@@ -194,7 +194,7 @@ function CountryInfo({ country }) {
             </div>
           </div>
         </TabPanel>
-        <TabPanel value="3" sx={{width: "100%", justifyContent: "center", display: "flex"}}>
+        <TabPanel value="3" sx={{width: "90%", justifyContent: "center", display: "flex"}}>
             <Maps />
         </TabPanel>
       </TabContext>
