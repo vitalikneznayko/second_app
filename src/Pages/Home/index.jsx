@@ -121,13 +121,19 @@ function Home() {
     []
   );
   const SortByContinent = (item) => {
-    setCurrentContinent(item);
-    setCurrentRegion(null);
-    const tmp = allCountry.filter(
-      (obj) => String(obj.continents) === String(item)
-    );
-    setSortedCountry(tmp);
-    setCurrentPage(1);
+    if (currentContinent != item) {
+      setCurrentContinent(item);
+      setCurrentRegion(null);
+      const tmp = allCountry.filter(
+        (obj) => String(obj.continents) === String(item)
+      );
+      setSortedCountry(tmp);
+      setCurrentPage(1);
+    }
+    else {
+      setCurrentContinent(null);
+      setSortedCountry(allCountry);
+    } 
   };
   const ResetAll = () => {
     setCurrentContinent(null);
@@ -201,13 +207,11 @@ function Home() {
           </div>
           <div className="continents">
             {Object.keys(regions).map((item) => (
+              <>
               <button key={item} onClick={() => SortByContinent(item)}>
                 {item}
               </button>
-            ))}
-          </div>
-          <div className="container-subreg">
-            {currentContinent && (
+            {currentContinent === item && (
               <div className="subreg">
                 {Array.from(regions[currentContinent]).map((subregion) => {
                   if (currentContinent != "Antarctica") {
@@ -222,9 +226,13 @@ function Home() {
                   }
                   return null;
                 })}
-              </div>
-            )}
+              </div>)}
+              </>
+              
+            ))}
+            
           </div>
+          
         </div>
       </div>
       <div className="pagination-box">

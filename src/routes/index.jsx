@@ -1,5 +1,5 @@
 import {Navigate, Route, Routes} from 'react-router'
-import Home from '../Pages/Home'
+import Home from '../pages/Home'
 import AboutCountry from '../pages/AboutCountry';
 
 function AppRouter(){

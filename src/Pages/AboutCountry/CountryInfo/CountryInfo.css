@@ -14,15 +14,23 @@
 }
 .border {
   display: flex;
+  flex-direction: row;
   align-items: center;
   max-width: 650px;
   flex-wrap: wrap;
 }
-.border button{
+.text-border{
+  padding-top: 10px;
+}
+.container-border{
   display: flex;
-  justify-content: start;
-  align-items: start;
-  width: 80px;
+  height: 90px;
+}
+.border button {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  height: 100%;
+  font-size: 18px;
 }
 p {
   font-size: 22px;
@@ -43,7 +51,6 @@ p {
   max-height: 350px;
   margin-right: 15px;
   margin-left: 40px;
-
 }
 .name-country {
   font-size: 55px;
@@ -62,7 +69,7 @@ p {
 .info div {
   margin: 10px 40px 0px 0px;
 }
-.container_CountryInfo{
+.container_CountryInfo {
   display: flex;
   flex-direction: column;
   align-items: center;

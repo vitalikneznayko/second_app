@@ -11,8 +11,10 @@ import Maps from "../../../componets/Maps";
 import { Link } from "react-router-dom";
 
 function CountryInfo({ country }) {
-  const currenciesKey = Object.keys(country.currencies);
-  const langKey = Object.keys(country.languages);
+  const currenciesKey =
+    country.currencies != null ? Object.keys(country.currencies) : null;
+  const langKey =
+    country.languages != null ? Object.keys(country.languages) : null;
   const [value, setValue] = React.useState("1");
 
   if (country.name.official == "Russian Federation") {
@@ -73,12 +75,14 @@ function CountryInfo({ country }) {
                       </p>
                       <p>
                         Languages:{" "}
-                        {langKey.map(
-                          (item, index) =>
-                            `${country.languages[item]}${
-                              langKey[index + 1] === undefined ? "" : ","
-                            } `
-                        )}
+                        {langKey === null
+                          ? "-"
+                          : langKey.map(
+                              (item, index) =>
+                                `${country.languages[item]}${
+                                  langKey[index + 1] === undefined ? "" : ","
+                                } `
+                            )}
                       </p>
                       <p>
                         Curiencies:{" "}
@@ -96,15 +100,17 @@ function CountryInfo({ country }) {
                     </div>
                   </div>
                   <div>
-                    <p className="border">
-                      Borders:{" "}
-                      {country.borders === undefined
-                        ? "-"
-                        : country.borders.map((item) => (
-                            <Link to={`/about/${item}`}>
-                              <button>{item}</button>
-                            </Link>
-                          ))}
+                    <p className="container-border">
+                      <span className="text-border">Borders:</span>
+                      <div className="border">
+                        {country.borders === undefined
+                          ? "-"
+                          : country.borders.map((item) => (
+                              <Link to={`/about/${item}`}>
+                                <button>{item}</button>
+                              </Link>
+                            ))}
+                      </div>
                     </p>
                   </div>
                 </div>

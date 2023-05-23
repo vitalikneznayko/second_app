@@ -16,11 +16,10 @@ const Maps = () => {
     async function fetchCountry() {
       try {
         const response = await axios(
-          `https://restcountries.com/v3.1/name/${cca3}`
+          `https://restcountries.com/v3.1/alpha/${cca3}`
         );
         setCountry(response.data[0]);
       } catch (error) {
-        console.error(error);
         setCountry("Error");
       }
     }
