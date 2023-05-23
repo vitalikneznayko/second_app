@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios, { all } from "axios";
+import axios from "axios";
 import CountryList from "./CountryList";
 import Header from "./Header";
 import SortList from "./SortList";
@@ -30,8 +30,13 @@ function Home() {
     Number(sessionStorage.getItem("pageNum"))
   );
   const [sortedCountry, setSortedCountry] = useState([]);
-
   const [countItems] = useState(10);
+  const [countSiblings, setCountSiblings] = useState(getCountSiblings());
+
+  function getCountSiblings() {
+    return document.documentElement.clientWidth <= 750 ? 1 : 2;
+  }
+
   const allPage =
     sortedCountry.length === 0
       ? allCountry.length / countItems
@@ -46,33 +51,44 @@ function Home() {
     sessionStorage.setItem("pageNum", p);
     setCurrentPage(p);
   };
-  useEffect(
-    () => async () => {
-      try {
-        const result = await axios("http://46.101.96.179/all");
-        const resultAddId = result.data.map((item, ind) => {
-          return { ...item, id: ind + 1 };
-        });
-        setAllCountry(resultAddId);
-      } catch {
-        setAllCountry("Error");
-      }
-    },
-    []
-  );
+
+  useEffect(() => {
+    function handleResize() {
+      setCountSiblings(getCountSiblings());
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => async () => {
+    try {
+      const result = await axios("http://46.101.96.179/all");
+      const resultId = result.data.map((item, i) => {
+        return { ...item, id: i + 1 };
+      });
+      setAllCountry(resultId);
+    } catch {
+      setAllCountry([]);
+    }
+    [];
+  });
+
   if (allCountry.length === 0) return <div>Loading...</div>;
   return (
     <>
-      <Header allCountry={allCountry} />
+      <Header allCountry={allCountry} headerText="Country list" />
       <div className="center-info">
         <CountryList contriesOnPage={currentCountry} />
         <SortList
           allCountry={allCountry}
           sortedCountry={sortedCountry}
           setSortedCountry={setSortedCountry}
-          currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-        />
+        ></SortList>
       </div>
       <div className="pagination-box">
         <StyledPagination
@@ -80,9 +96,11 @@ function Home() {
           page={currentPage}
           variant="outlined"
           shape="rounded"
-          size="large"
+          size={
+            document.documentElement.clientWidth <= 750 ? "medium" : "large"
+          }
           onChange={nextListPage}
-          siblingCount={2}
+          siblingCount={countSiblings}
         ></StyledPagination>
       </div>
     </>

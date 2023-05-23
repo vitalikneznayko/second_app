@@ -6,7 +6,7 @@ function HeaderAbout() {
   return (
     <div className="header">
       <button onClick = {() => navigate(-1)}className="header-text">Back</button>
-      <Link to="/">
+      <Link key = "HeaderAbout" to="/">
         <button className="header-text">Back to list</button>
       </Link>
     </div>

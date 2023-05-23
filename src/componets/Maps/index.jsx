@@ -14,13 +14,13 @@ const Maps = () => {
 
   useEffect(() => {
     async function fetchCountry() {
-          try {
-            const result = await axios("http://46.101.96.179/all");
-            const tmp = result.data.find((item) => item.cca3 === cca3);
-            setCountry(tmp);
-          } catch {
-            setCountry("Error");
-          }
+      try {
+        const result = await axios("http://46.101.96.179/all");
+        const tmp = result.data.find((item) => item.cca3 === cca3);
+        setCountry(tmp);
+      } catch {
+        setCountry("Error");
+      }
     }
     fetchCountry();
   }, [cca3]);
@@ -41,7 +41,7 @@ const Maps = () => {
   return (
     <div className="map_container">
       {isLoaded && (
-        <GoogleMap mapContainerClassName="map" zoom={7} center={defaultCenter}>
+        <GoogleMap mapContainerClassName="map" zoom={6} center={defaultCenter}>
           <Marker position={defaultCenter} />
         </GoogleMap>
       )}

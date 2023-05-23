@@ -1,7 +1,9 @@
 .country-list {
-  width: 550px;
+  width: 60%;
 }
-
+.main-page{
+  width: 70%;
+}
 .country-item {
   margin-top: 3px;
   border: 1px solid white;
@@ -58,16 +60,21 @@
   width: 60px;
   height: 48px;
 }
+@media (max-width: 1250px) {
+  .info-country-box{
+    display: none;
+  }
+}
 @media (max-width: 800px) {
   .country-item {
     width: 268px;
     font-size: 17px;
   }
   .country-item {
-    width: 100%;
+    width: 230%;
   }
   .country-item:hover {
-    width: 100%;
+    width: 230%;
   }
   .country-list {
     display: flex;
@@ -76,8 +83,5 @@
   }
   .item-right div {
     padding-left: 25px;
-  }
-  .info-country-box {
-    display: none;
   }
 }

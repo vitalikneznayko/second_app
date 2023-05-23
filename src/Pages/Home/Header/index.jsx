@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router";
 
-function Header({ allCountry }) {
+function Header({ allCountry, headerText}) {
   const [CountrySearch, setCountrySearch] = useState([]);
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ function Header({ allCountry }) {
 
   return (
     <div className="header-container">
-      <div className="header-text">Country list</div>
+      <div className="header-text">{headerText}</div>
       <div className="searcher">
         <input
           onChange={handleSearchChange}

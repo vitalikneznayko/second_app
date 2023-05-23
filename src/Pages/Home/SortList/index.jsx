@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import "../Home.css";
+import CountryList from "../CountryList";
 
-
-function SortList({allCountry, sortedCountry, setSortedCountry, currentPage, setCurrentPage}) {
+function SortList({
+  currentCountry,
+  allCountry,
+  sortedCountry,
+  setSortedCountry,
+  setCurrentPage,
+}) {
   const [flagSortAB, setFlagSortAB] = useState(false);
   const [flagSortId, setFlagSortId] = useState(false);
   const [currentContinent, setCurrentContinent] = useState(null);
@@ -107,45 +113,45 @@ function SortList({allCountry, sortedCountry, setSortedCountry, currentPage, set
   };
   if (allCountry.length === 0) return <div>Loading...</div>;
   return (
-      <div className="container-filter">
-        <div className="filter">
-          <button variant="contained" onClick={() => filterById()}>
-            Filter id{flagSortId ? "↓" : "↑"}
-          </button>
-          <button variant="contained" onClick={() => filterAlphabetically()}>
-            Filter {!flagSortAB ? "A-Y" : "Y-A"}
-          </button>
-          <button variant="contained" onClick={() => ResetAll()}>
-            Reset
-          </button>
-        </div>
-        <div className="continents">
-          {Object.keys(regions).map((item) => (
-            <>
-              <button key={item} onClick={() => SortByContinent(item)}>
-                {item}
-              </button>
-              {currentContinent === item && (
-                <div className="subreg">
-                  {Array.from(regions[currentContinent]).map((subregion) => {
-                    if (currentContinent != "Antarctica") {
-                      return (
-                        <button
-                          onClick={() => SortByRegion(subregion)}
-                          key={subregion}
-                        >
-                          {subregion}
-                        </button>
-                      );
-                    }
-                    return null;
-                  })}
-                </div>
-              )}
-            </>
-          ))}
-        </div>
+    <div className="container-filter">
+      <div className="filter">
+        <button variant="contained" onClick={() => filterById()}>
+          Filter id{flagSortId ? "↓" : "↑"}
+        </button>
+        <button variant="contained" onClick={() => filterAlphabetically()}>
+          Filter {!flagSortAB ? "A-Y" : "Y-A"}
+        </button>
+        <button variant="contained" onClick={() => ResetAll()}>
+          Reset
+        </button>
       </div>
+      <div className="continents">
+        {Object.keys(regions).map((item) => (
+          <>
+            <button key={item} onClick={() => SortByContinent(item)}>
+              {item}
+            </button>
+            {currentContinent === item && (
+              <div className="subreg">
+                {Array.from(regions[currentContinent]).map((subregion) => {
+                  if (currentContinent != "Antarctica") {
+                    return (
+                      <button
+                        onClick={() => SortByRegion(subregion)}
+                        key={subregion}
+                      >
+                        {subregion}
+                      </button>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+            )}
+          </>
+        ))}
+      </div>
+    </div>
   );
 }
 

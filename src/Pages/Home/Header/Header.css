@@ -24,6 +24,9 @@
   .pagination-box {
     justify-content: start;
   }
+  .searcher {
+    margin-bottom: 15px;
+  }
   .searcher input {
     width: 50%;
   }
@@ -31,6 +34,7 @@
     flex-direction: column;
   }
   .header-text {
+    width: 50%;
     font-size: 30px;
   }
 }

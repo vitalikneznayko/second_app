@@ -34,6 +34,7 @@ function CountriesWithOneLanguage() {
   const [currentPage, setCurrentPage] = useState(
     Number(sessionStorage.getItem("pageNum"))
   );
+  const [languageName, setLanguageName] = useState("");
   const [sortedCountry, setSortedCountry] = useState([]);
   const navigate = useNavigate();
   const [countItems] = useState(10);
@@ -59,6 +60,7 @@ function CountriesWithOneLanguage() {
       const filteredCountry = resultId.filter(
         (country) => country.languages && country.languages[language]
       );
+      setLanguageName(filteredCountry[0].languages[language]);
       setAllCountry(filteredCountry);
     } catch {
       setAllCountry([]);
@@ -69,19 +71,23 @@ function CountriesWithOneLanguage() {
     <>
       <Header
         allCountry={allCountry}
-        // headerText={`COUNTRIES THAT SPEAKS ${langName.toUpperCase()}`}
+        headerText={`Language: ${languageName.toUpperCase()}`}
       />
-      <button className="button" onClick={() => navigate(-1)}>{`Back`}</button>
-      <Link className="button" to="/">
-        <button>Back to list</button>
-      </Link>
+      <div className="button-back">
+        <button
+          className="button"
+          onClick={() => navigate(-1)}
+        >{`Back`}</button>
+        <Link key="Back to list" className="button" to="/">
+          <button>Back to list</button>
+        </Link>
+      </div>
       <div className="center-info">
         <CountriesList contriesOnPage={currentCountry} />
         <SortList
           allCountry={allCountry}
           sortedCountry={sortedCountry}
           setSortedCountry={setSortedCountry}
-          currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         ></SortList>
         <div className="pagination-box">

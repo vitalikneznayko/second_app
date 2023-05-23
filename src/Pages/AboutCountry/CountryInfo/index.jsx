@@ -76,6 +76,7 @@ function CountryInfo({ country }) {
                         Languages:{" "}
                         {langKey.map((item, index) => (
                           <Link
+                            className="language"
                             key={item}
                             to={`/home/language/${item}`}
                           >
@@ -106,8 +107,8 @@ function CountryInfo({ country }) {
                         {country.borders === undefined
                           ? "-"
                           : country.borders.map((item) => (
-                              <Link to={`/about/${item}`}>
-                                <button key={item}>{item}</button>
+                              <Link key={item} to={`/about/${item}`}>
+                                <button>{item}</button>
                               </Link>
                             ))}
                       </span>
@@ -193,8 +194,8 @@ function CountryInfo({ country }) {
             </div>
           </div>
         </TabPanel>
-        <TabPanel value="3">
-          <Maps />
+        <TabPanel value="3" sx={{width: "100%", justifyContent: "center", display: "flex"}}>
+            <Maps />
         </TabPanel>
       </TabContext>
     </div>
