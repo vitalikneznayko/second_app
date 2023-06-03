@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import "../Home.css";
-import CountryList from "../CountryList";
 
 function SortList({
-  currentCountry,
+
   allCountry,
   sortedCountry,
   setSortedCountry,
   setCurrentPage,
 }) {
-  const [flagSortAB, setFlagSortAB] = useState(false);
-  const [flagSortId, setFlagSortId] = useState(false);
+  const [flagSortAB, setFlagSortAB] = useState(null);
+  const [flagSortId, setFlagSortId] = useState(null);
   const [currentContinent, setCurrentContinent] = useState(null);
   const [currentRegion, setCurrentRegion] = useState(null);
   const [regions, setRegion] = useState([]);
@@ -72,6 +71,8 @@ function SortList({
   };
 
   const SortByContinent = (item) => {
+    setFlagSortAB(null);
+    setFlagSortId(null);
     if (currentContinent != item) {
       setCurrentContinent(item);
       setCurrentRegion(null);
@@ -102,6 +103,8 @@ function SortList({
     setSortedCountry(allCountry);
   };
   const SortByRegion = (item) => {
+    setFlagSortAB(null);
+    setFlagSortId(null);
     setCurrentRegion(item);
     const tmp = allCountry.filter(
       (obj) =>
@@ -110,6 +113,7 @@ function SortList({
     );
     setSortedCountry(tmp);
     setCurrentPage(1);
+
   };
   if (allCountry.length === 0) return <div>Loading...</div>;
   return (
