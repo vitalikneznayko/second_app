@@ -40,7 +40,7 @@ function Header({ allCountry, headerText}) {
             <option key={item.name.common} value={item.name.common}></option>
           ))}
         </datalist>
-        <button onClick={handleSearchButton}>Search</button>
+        <button key = "Search" onClick={handleSearchButton}>Search</button>
       </div>
     </div>
   );

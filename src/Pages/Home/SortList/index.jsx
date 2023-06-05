@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../Home.css";
-import { all } from "axios";
 
 function SortList({
   allCountry,
@@ -130,24 +129,26 @@ function SortList({
   return (
     <div className="container-filter">
       <div className="filter">
-        <button variant="contained" onClick={() => filterById()}>
+        <button key="id" variant="contained" onClick={() => filterById()}>
           Filter id{flagSortId ? "↓" : "↑"}
         </button>
-        <button variant="contained" onClick={() => filterAlphabetically()}>
+        <button
+          key="AB"
+          variant="contained"
+          onClick={() => filterAlphabetically()}
+        >
           Filter {!flagSortAB ? "A-Y" : "Y-A"}
         </button>
-        <button variant="contained" onClick={() => ResetAll()}>
+        <button key="Reset" variant="contained" onClick={() => ResetAll()}>
           Reset
         </button>
       </div>
-      <div className="continents">
+      <div key="continents" className="continents">
         {Object.keys(regions).map((item) => (
-          <>
-            <button key={item} onClick={() => SortByContinent(item)}>
-              {item}
-            </button>
+          <div key={item} className="continents">
+            <button onClick={() => SortByContinent(item)}>{item}</button>
             {currentContinent === item && (
-              <div className="subreg">
+              <div key="blockreg" className="subreg">
                 {Array.from(regions[currentContinent]).map((subregion) => {
                   if (currentContinent != "Antarctica") {
                     return (
@@ -163,7 +164,7 @@ function SortList({
                 })}
               </div>
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>
