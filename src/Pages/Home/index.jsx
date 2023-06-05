@@ -37,15 +37,13 @@ function Home() {
     return document.documentElement.clientWidth <= 750 ? 1 : 2;
   }
 
-  const allPage =
-    sortedCountry.length === 0
-      ? allCountry.length / countItems
-      : Math.ceil(sortedCountry.length / countItems);
+  const allPage = Math.ceil(sortedCountry.length / countItems);
   const lastCountryIndex = currentPage * countItems;
   const firstCountryIndex = lastCountryIndex - countItems;
-  const currentCountry = (
-    sortedCountry.length === 0 ? allCountry : sortedCountry
-  ).slice(firstCountryIndex, lastCountryIndex);
+  const currentCountry = sortedCountry.slice(
+    firstCountryIndex,
+    lastCountryIndex
+  );
 
   const nextListPage = (e, p) => {
     sessionStorage.setItem("pageNum", p);
@@ -53,29 +51,39 @@ function Home() {
   };
 
   useEffect(() => {
-    function handleResize() {
-      setCountSiblings(getCountSiblings());
+    if (sortedCountry.length === 0) {
+      setSortedCountry(allCountry);
     }
+  }, [sortedCountry, allCountry]);
 
-    window.addEventListener("resize", handleResize);
+  useEffect(() => {
+    const handleResize = () => {
+      setCountSiblings(getCountSiblings());
+    };
+
+    addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      removeEventListener("resize", handleResize);
     };
   }, []);
 
-  useEffect(() => async () => {
-    try {
-      const result = await axios("http://46.101.96.179/all");
-      const resultId = result.data.map((item, i) => {
-        return { ...item, id: i + 1 };
-      });
-      setAllCountry(resultId);
-    } catch {
-      setAllCountry([]);
-    }
-    [];
-  });
+  useEffect(() => {
+    const fetchCountryData = async () => {
+      try {
+        const result = await axios.get("http://46.101.96.179/all");
+
+        const resultAddId = result.data.map((item, i) => {
+          return { ...item, id: i + 1 };
+        });
+
+        setAllCountry(resultAddId);
+      } catch {
+        setAllCountry("Error");
+      }
+    };
+    fetchCountryData();
+  }, []);
 
   if (allCountry.length === 0) return <div>Loading...</div>;
   return (
@@ -85,6 +93,7 @@ function Home() {
         <CountryList contriesOnPage={currentCountry} />
         <SortList
           allCountry={allCountry}
+          setAllCountry={setAllCountry}
           sortedCountry={sortedCountry}
           setSortedCountry={setSortedCountry}
           setCurrentPage={setCurrentPage}

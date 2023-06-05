@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import "../Home.css";
+import { all } from "axios";
 
 function SortList({
-
   allCountry,
+  setAllCountry,
   sortedCountry,
   setSortedCountry,
   setCurrentPage,
 }) {
-  const [flagSortAB, setFlagSortAB] = useState(null);
-  const [flagSortId, setFlagSortId] = useState(null);
+  const [flagSortAB, setFlagSortAB] = useState(false);
+  const [flagSortId, setFlagSortId] = useState(false);
   const [currentContinent, setCurrentContinent] = useState(null);
   const [currentRegion, setCurrentRegion] = useState(null);
   const [regions, setRegion] = useState([]);
+
   useEffect(() => {
     const tmp = allCountry.reduce((acc, country) => {
       const { continents, subregion } = country;
@@ -24,55 +26,66 @@ function SortList({
       return acc;
     }, {});
     setRegion(tmp);
-  }, [allCountry]);
+  }, []);
+
   const filterById = () => {
     setFlagSortId(!flagSortId);
-    let sortedById;
     if (!flagSortId) {
-      sortedById = (
-        sortedCountry.length === 0 ? allCountry : sortedCountry
-      ).sort((a, b) => b.id - a.id);
-      setSortedCountry(sortedById);
-    } else
-      sortedById = (
-        sortedCountry.length === 0 ? allCountry : sortedCountry
-      ).sort((a, b) => a.id - b.id);
-    setSortedCountry(sortedById);
+      const sortedById = sortedCountry.sort((a, b) => b.id - a.id);
+      setSortedCountry([...sortedById]);
+      const sortedByIdCountry = allCountry.sort((a, b) => b.id - a.id);
+      setAllCountry([...sortedByIdCountry]);
+      
+    } else {
+      const sortedById = sortedCountry.sort((a, b) => a.id - b.id);
+      setSortedCountry([...sortedById]);
+      const sortedByIdCountry = allCountry.sort((a, b) => a.id - b.id);
+      setAllCountry([...sortedByIdCountry]);
+      
+    }
   };
   const filterAlphabetically = () => {
     setFlagSortAB(!flagSortAB);
-    let sortedAlphabetically;
     if (flagSortAB) {
-      sortedAlphabetically = (
-        sortedCountry.length === 0 ? allCountry : sortedCountry
-      ).sort(function (a, b) {
-        if (a.name.common < b.name.common) {
-          return -1;
-        }
-        if (a.name.common > b.name.common) {
-          return 1;
-        }
+      const tmpCountry = allCountry.sort((a, b) => {
+        if (a.name.common > b.name.common) return -1;
+        if (a.name.common < b.name.common) return 1;
         return 0;
       });
+      setAllCountry([...tmpCountry]);
+
+      const tmp = sortedCountry.sort(function (a, b) {
+        if (a.name.common > b.name.common) return -1;
+        if (a.name.common < b.name.common) return 1;
+        return 0;
+      });
+      setSortedCountry([...tmp]);
     } else {
-      sortedAlphabetically = (
-        sortedCountry.length === 0 ? allCountry : sortedCountry
-      ).sort(function (a, b) {
+      const tmpCountry = allCountry.sort((a, b) => {
         if (a.name.common < b.name.common) {
-          return 1;
+          return -1;
         }
         if (a.name.common > b.name.common) {
-          return -1;
+          return 1;
         }
         return 0;
       });
+      setAllCountry([...tmpCountry]);
+
+      const tmp = sortedCountry.sort(function (a, b) {
+        if (a.name.common < b.name.common) {
+          return -1;
+        }
+        if (a.name.common > b.name.common) {
+          return 1;
+        }
+        return 0;
+      });
+      setSortedCountry([...tmp]);
     }
-    setSortedCountry(sortedAlphabetically);
   };
 
   const SortByContinent = (item) => {
-    setFlagSortAB(null);
-    setFlagSortId(null);
     if (currentContinent != item) {
       setCurrentContinent(item);
       setCurrentRegion(null);
@@ -103,17 +116,15 @@ function SortList({
     setSortedCountry(allCountry);
   };
   const SortByRegion = (item) => {
-    setFlagSortAB(null);
-    setFlagSortId(null);
     setCurrentRegion(item);
     const tmp = allCountry.filter(
       (obj) =>
         String(obj.continents) === String(currentContinent) &&
         String(obj.subregion) === String(item)
     );
+    
     setSortedCountry(tmp);
     setCurrentPage(1);
-
   };
   if (allCountry.length === 0) return <div>Loading...</div>;
   return (
